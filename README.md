@@ -1,4 +1,4 @@
-🎟️ Event Management & Ticketing System
+🎟️ # Event Management & Ticketing System
 📌 Overview
 The Event Management & Ticketing System is a MERN stack application that allows event organizers to create, manage, and sell tickets for events.
 Users can browse events, purchase tickets, and check in using QR codes.
@@ -12,13 +12,11 @@ Users can browse events, purchase tickets, and check in using QR codes.
 ✅ Admin Dashboard for event analytics
 
 🛠️ Tech Stack
-Frontend: React.js, Redux Toolkit, Material UI
+Frontend: React.js, Redux Toolkit, Material UI,Vite,Typescript
 Backend: Node.js, Express.js, MongoDB, Mongoose
 Others: JWT, Stripe/Razorpay, WebSockets, Cloudinary
 🎯 Installation
-Clone the repo:
-
-git clone https://github.com/Bidhu1024/Tickets.git
+Clone the repo: git clone https://github.com/Bidhu1024/Tickets.git
 cd event-ticketing-system
 Install dependencies:
 cd client  # For frontend
@@ -32,6 +30,9 @@ cd server
 npm start
 
 # Run frontend
+cd client
+npm run dev
+
 📌 Future Enhancements (to be added)
 Email & SMS notifications for ticket confirmation
 AI-based event recommendations
