@@ -18,7 +18,7 @@ Others: JWT, Stripe/Razorpay, WebSockets, Cloudinary
 🎯 Installation
 Clone the repo:
 
-git clone https://github.com/your-username/event-ticketing-system.git
+git clone https://github.com/Bidhu1024/Tickets.git
 cd event-ticketing-system
 Install dependencies:
 cd client  # For frontend
