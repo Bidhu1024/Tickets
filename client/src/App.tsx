@@ -3,14 +3,15 @@ import React from "react";
 import { Suspense } from "react";
 import LoadingComponent from "./helpers/LoadingComponent";
 
-const Login = React.lazy(() => import("./screens/Login/Login"));
+
+const Main = React.lazy(() => import("./screens/Login"));
 
 function App() {
   return (
     <BrowserRouter>
       <Suspense fallback={<LoadingComponent />}>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Main />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
