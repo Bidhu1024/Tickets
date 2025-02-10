@@ -4,6 +4,7 @@ import TextBox from "../../components/TextBox";
 import logo from "../../assets/Screenshot 2025-02-10 232009.png";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { FC } from "react";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -13,7 +14,11 @@ const validationSchema = Yup.object({
     .min(8, "Password must be at least 8 characters")
     .required("Password is required"),
 });
-const Login = ({ setLogin }) => {
+
+interface LoginProps{
+  setLogin:(val:boolean)=>void
+}
+const Login:FC<LoginProps> = ({ setLogin }) => {
   const formik = useFormik({
     initialValues: {
       email: "",
