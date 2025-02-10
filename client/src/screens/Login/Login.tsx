@@ -57,10 +57,9 @@ const Login: FC<LoginProps> = ({ setLogin }) => {
           boxShadow: 3,
           bgcolor: "white",
           display: "flex",
-          flexDirection: { xs: "column", md: "row" }, // Stack vertically on small screens
+          flexDirection: { xs: "column", md: "row" }, 
         }}
       >
-        {/* Image Section */}
         <Box
           sx={{
             width: { xs: "100%", md: "50%" },
@@ -76,7 +75,6 @@ const Login: FC<LoginProps> = ({ setLogin }) => {
           />
         </Box>
 
-        {/* Form Section */}
         <Box
           sx={{
             width: { xs: "100%", md: "50%" },
@@ -130,6 +128,7 @@ const Login: FC<LoginProps> = ({ setLogin }) => {
                   height: "2.5rem",
                   width: { xs: "100%", md: "12rem" },
                   mt: "2rem",
+                  ml:{xs:"0",md:"2.8rem"},
                   padding: "4px 6px",
                 }}
                 children="Login"
@@ -138,10 +137,10 @@ const Login: FC<LoginProps> = ({ setLogin }) => {
               />
             </form>
           </Box>
-          <Typography sx={{ mt: "1rem", textAlign: "center" }}>
+          <Typography sx={{ mt: "1rem",ml:{xs:"0",md:"2rem"}, }}>
             Don't have an account?{" "}
             <span
-              style={{ color: "blue", cursor: "pointer" }}
+              style={{ color: "blue", cursor: "pointer", }}
               onClick={() => setLogin(false)}
             >
               Sign up
