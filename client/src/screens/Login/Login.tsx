@@ -1,9 +1,10 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import LoginImage from "../../assets/cute-rabbit-reading-book-vector-icon-illustration-animal-education-icon-concept-isolated-premium-vector-flat-cartoon-style_138676-3637.avif";
 import TextBox from "../../components/TextBox";
-import { useState } from "react";
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import logo from "../../assets/Screenshot 2025-02-10 232009.png";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { FC } from "react";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -13,7 +14,11 @@ const validationSchema = Yup.object({
     .min(8, "Password must be at least 8 characters")
     .required("Password is required"),
 });
-const Login = () => {
+
+interface LoginProps{
+  setLogin:(val:boolean)=>void
+}
+const Login:FC<LoginProps> = ({ setLogin }) => {
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -24,7 +29,10 @@ const Login = () => {
       console.log("Form submitted:", values);
     },
   });
-
+  const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    console.log("done");
+  };
   return (
     <Box
       sx={{
@@ -55,31 +63,62 @@ const Login = () => {
           width="50%"
           style={{ borderRadius: "10px" }}
         />
-        <Box width="100%">
-          <Typography>Welcome Back</Typography>
-          <Typography>Please enter your details</Typography>
-          <form autoComplete="off">
-            <TextBox
-              placeholder="Enter your email"
-              title="Email*"
-              value={formik.values.email}
-              onChange={(value) => formik.setFieldValue("email", value)}
-              error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
-              type="text"
-            />
-            <TextBox
-              placeholder="Enter your password"
-              title="Password*"
-              value={formik.values.password}
-              onChange={(value) => formik.setFieldValue("password", value)}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
-               type="password"
-            />
+        <Box width="100%" padding={"1rem"}>
+          <Box>
+            <img src={logo} alt="logo" height="10%" width="25%" />
+          </Box>
+          <Box sx={{ mt: "2rem" }}>
+            <Typography fontSize={"1.4rem"} fontWeight={"600"}>
+              Welcome Back
+            </Typography>
+            <Typography fontSize={"1rem"} fontWeight={"500"}>
+              Please enter your details
+            </Typography>
+            <form autoComplete="off">
+              <TextBox
+                placeholder="Enter your email"
+                title="Email*"
+                value={formik.values.email}
+                onChange={(value) => formik.setFieldValue("email", value)}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
+                type="text"
+              />
+              <TextBox
+                placeholder="Enter your password"
+                title="Password*"
+                value={formik.values.password}
+                onChange={(value) => formik.setFieldValue("password", value)}
+                error={
+                  formik.touched.password && Boolean(formik.errors.password)
+                }
+                helperText={formik.touched.password && formik.errors.password}
+                type="password"
+              />
 
-            
-          </form>
+              <Button
+                sx={{
+                  height: "1.8rem",
+                  width: "12rem",
+                  mt: "2.8rem",
+                  padding: "4px 6px",
+                  ml: "2.5rem",
+                }}
+                children="Login"
+                variant="contained"
+                onClick={handleLogin}
+              />
+            </form>
+          </Box>
+          <Typography sx={{ mt: "1rem", ml: "1.8rem" }}>
+            Don't have an account?{" "}
+            <span
+              style={{ color: "blue", cursor: "pointer" }}
+              onClick={() => setLogin(false)}
+            >
+              Sign up
+            </span>
+          </Typography>
         </Box>
       </Box>
     </Box>

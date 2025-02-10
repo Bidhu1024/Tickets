@@ -5,11 +5,19 @@ interface TextBoxProps {
   onChange: (val: string) => void;
   value: string;
   placeholder: string;
-  type:string
+  type: string;
   error?: boolean;
-  helperText?: string | boolean | undefined
+  helperText?: string | boolean | undefined;
 }
-const TextBox: FC<TextBoxProps> = ({error,helperText,type, title, onChange, value, placeholder }) => {
+const TextBox: FC<TextBoxProps> = ({
+  error,
+  helperText,
+  type,
+  title,
+  onChange,
+  value,
+  placeholder,
+}) => {
   return (
     <Stack sx={{ gap: ".4rem", mt: "2.5rem" }}>
       <Typography>{title}</Typography>
