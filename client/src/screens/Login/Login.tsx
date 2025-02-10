@@ -15,10 +15,11 @@ const validationSchema = Yup.object({
     .required("Password is required"),
 });
 
-interface LoginProps{
-  setLogin:(val:boolean)=>void
+interface LoginProps {
+  setLogin: (val: boolean) => void;
 }
-const Login:FC<LoginProps> = ({ setLogin }) => {
+
+const Login: FC<LoginProps> = ({ setLogin }) => {
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -29,10 +30,12 @@ const Login:FC<LoginProps> = ({ setLogin }) => {
       console.log("Form submitted:", values);
     },
   });
+
   const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     console.log("done");
   };
+
   return (
     <Box
       sx={{
@@ -47,31 +50,57 @@ const Login:FC<LoginProps> = ({ setLogin }) => {
     >
       <Box
         sx={{
-          height: { xs: "20rem", md: "30rem" },
+          height: { xs: "auto", md: "30rem" },
           width: { xs: "90%", md: "60rem" },
           maxWidth: "100%",
           borderRadius: "10px",
           boxShadow: 3,
           bgcolor: "white",
           display: "flex",
+          flexDirection: { xs: "column", md: "row" }, // Stack vertically on small screens
         }}
       >
-        <img
-          src={LoginImage}
-          alt="login imsgr"
-          height="100%"
-          width="50%"
-          style={{ borderRadius: "10px" }}
-        />
-        <Box width="100%" padding={"1rem"}>
+        {/* Image Section */}
+        <Box
+          sx={{
+            width: { xs: "100%", md: "50%" },
+            height: { xs: "200px", md: "100%" },
+            overflow: "hidden",
+            borderRadius: "10px",
+          }}
+        >
+          <img
+            src={LoginImage}
+            alt="login image"
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
+        </Box>
+
+        {/* Form Section */}
+        <Box
+          sx={{
+            width: { xs: "100%", md: "50%" },
+            padding: { xs: "1rem", md: "2rem" },
+          }}
+        >
           <Box>
-            <img src={logo} alt="logo" height="10%" width="25%" />
+            <img
+              src={logo}
+              alt="logo"
+              style={{ width: "25%", height: "auto" }}
+            />
           </Box>
-          <Box sx={{ mt: "2rem" }}>
-            <Typography fontSize={"1.4rem"} fontWeight={"600"}>
+          <Box sx={{ mt: { xs: "1rem", md: "2rem" } }}>
+            <Typography
+              fontSize={{ xs: "1.2rem", md: "1.4rem" }}
+              fontWeight={"600"}
+            >
               Welcome Back
             </Typography>
-            <Typography fontSize={"1rem"} fontWeight={"500"}>
+            <Typography
+              fontSize={{ xs: "0.9rem", md: "1rem" }}
+              fontWeight={"500"}
+            >
               Please enter your details
             </Typography>
             <form autoComplete="off">
@@ -98,11 +127,10 @@ const Login:FC<LoginProps> = ({ setLogin }) => {
 
               <Button
                 sx={{
-                  height: "1.8rem",
-                  width: "12rem",
-                  mt: "2.8rem",
+                  height: "2.5rem",
+                  width: { xs: "100%", md: "12rem" },
+                  mt: "2rem",
                   padding: "4px 6px",
-                  ml: "2.5rem",
                 }}
                 children="Login"
                 variant="contained"
@@ -110,7 +138,7 @@ const Login:FC<LoginProps> = ({ setLogin }) => {
               />
             </form>
           </Box>
-          <Typography sx={{ mt: "1rem", ml: "1.8rem" }}>
+          <Typography sx={{ mt: "1rem", textAlign: "center" }}>
             Don't have an account?{" "}
             <span
               style={{ color: "blue", cursor: "pointer" }}
