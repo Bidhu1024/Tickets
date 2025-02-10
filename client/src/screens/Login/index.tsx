@@ -6,7 +6,7 @@ const Main = () => {
     const [login,setLogin] = useState<boolean>(true)
   return (
     <div>
-      {login? <Login/> : <Register/>}
+      {login? <Login setLogin={setLogin}/> : <Register/>}
     </div>
   )
 }
