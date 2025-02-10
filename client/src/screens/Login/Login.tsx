@@ -14,8 +14,6 @@ const validationSchema = Yup.object({
     .required("Password is required"),
 });
 const Login = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
   const formik = useFormik({
     initialValues: {
       email: "",
