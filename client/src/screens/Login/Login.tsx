@@ -5,6 +5,7 @@ import logo from "../../assets/Screenshot 2025-02-10 232009.png";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { FC } from "react";
+import Header from "../../components/Header";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -57,7 +58,7 @@ const Login: FC<LoginProps> = ({ setLogin }) => {
           boxShadow: 3,
           bgcolor: "white",
           display: "flex",
-          flexDirection: { xs: "column", md: "row" }, 
+          flexDirection: { xs: "column", md: "row" },
         }}
       >
         <Box
@@ -89,12 +90,7 @@ const Login: FC<LoginProps> = ({ setLogin }) => {
             />
           </Box>
           <Box sx={{ mt: { xs: "1rem", md: "2rem" } }}>
-            <Typography
-              fontSize={{ xs: "1.2rem", md: "1.4rem" }}
-              fontWeight={"600"}
-            >
-              Welcome Back
-            </Typography>
+            <Header title="Welcome Back" />
             <Typography
               fontSize={{ xs: "0.9rem", md: "1rem" }}
               fontWeight={"500"}
@@ -128,7 +124,7 @@ const Login: FC<LoginProps> = ({ setLogin }) => {
                   height: "2.5rem",
                   width: { xs: "100%", md: "12rem" },
                   mt: "2rem",
-                  ml:{xs:"0",md:"2.8rem"},
+                  ml: { xs: "0", md: "2.8rem" },
                   padding: "4px 6px",
                 }}
                 children="Login"
@@ -137,10 +133,10 @@ const Login: FC<LoginProps> = ({ setLogin }) => {
               />
             </form>
           </Box>
-          <Typography sx={{ mt: "1rem",ml:{xs:"0",md:"2rem"}, }}>
+          <Typography sx={{ mt: "1rem", ml: { xs: "0", md: "2rem" } }}>
             Don't have an account?{" "}
             <span
-              style={{ color: "blue", cursor: "pointer", }}
+              style={{ color: "blue", cursor: "pointer" }}
               onClick={() => setLogin(false)}
             >
               Sign up
