@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
 
-import authRoutes from "./routes/Auth";
+import authRoutes from "./src/routes/auth";
 
 mongoose.set("strictQuery", true);
 dotenv.config();
