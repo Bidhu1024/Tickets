@@ -11,7 +11,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_key';
 // @route   POST /api/auth/register
 // @access  Public
 export const registerUser = async (req: Request, res: Response): Promise<void> => {
-  const { name, email, password, phone, confirmPassword } = req.body;
+  const { name, email, password, phone, confirmPassword,role } = req.body;
 
   try {
     const userExists = await User.findOne({ email });
@@ -20,7 +20,7 @@ export const registerUser = async (req: Request, res: Response): Promise<void> =
       return;
     }
 
-    const user = await User.create({ name, email, password, phone, confirmPassword });
+    const user = await User.create({ name, email, password, phone, confirmPassword,role });
     const token = jwt.sign({ id: user._id }, JWT_SECRET, {
       expiresIn: '1h',
     });
