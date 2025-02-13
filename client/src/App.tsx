@@ -1,21 +1,7 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import React from "react";
-import { Suspense } from "react";
-import LoadingComponent from "./helpers/LoadingComponent";
-
-
-const Main = React.lazy(() => import("./screens/Login"));
+import AllRoutes from "./GetRoutes/AllRoutes";
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Suspense fallback={<LoadingComponent />}>
-        <Routes>
-          <Route path="/" element={<Main />} />
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
-  );
+  return <AllRoutes />;
 }
 
 export default App;

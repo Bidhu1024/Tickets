@@ -22,16 +22,13 @@ const validationSchema = Yup.object({
     .required("Name is required")
     .min(4, "Name must be at least 4 characters")
     .max(50, "Name must be less than 50 characters"),
-
-  email: Yup.string()
+email: Yup.string()
     .email("Invalid email address")
     .required("Email is required"),
-
-  phone: Yup.string()
+phone: Yup.string()
     .required("Phone number is required")
     .matches(/^[0-9]{10}$/, "Phone number must be exactly 10 digits"),
-
-  password: Yup.string()
+ password: Yup.string()
     .min(8, "Password must be at least 8 characters")
     .required("Password is required")
     .matches(
@@ -47,11 +44,9 @@ const validationSchema = Yup.object({
     .required("Role is required")
     .oneOf(["Organizer", "User"], "Please select a role"),
 });
-
 interface RegisterProps {
   setLogin: (val: boolean) => void;
 }
-
 const Register: FC<RegisterProps> = ({ setLogin }) => {
   const formik = useFormik({
     initialValues: {
@@ -160,8 +155,7 @@ const Register: FC<RegisterProps> = ({ setLogin }) => {
                 type="password"
               />
             </Grid>
-
-            <Grid item xs={12} md={6}>
+  <Grid item xs={12} md={6}>
               <TextBox
                 placeholder="Confirm your password"
                 title="Confirm Password*"
@@ -180,8 +174,7 @@ const Register: FC<RegisterProps> = ({ setLogin }) => {
                 type="password"
               />
             </Grid>
-
-            <Grid item xs={12} md={6} sx={{ mt: "2.6rem" }}>
+ <Grid item xs={12} md={6} sx={{ mt: "2.6rem" }}>
               <FormControl component="fieldset" sx={{ width: "100%" }}>
                 <FormLabel component="legend" sx={{ color: "text.primary" }}>
                   Role*
@@ -234,9 +227,7 @@ const Register: FC<RegisterProps> = ({ setLogin }) => {
             Register
           </Button>
         </form>
-
-        {/* Login Link */}
-        <Typography
+<Typography
           variant="body2"
           sx={{ textAlign: "center", mt: 3, color: "text.secondary" }}
         >
@@ -256,5 +247,4 @@ const Register: FC<RegisterProps> = ({ setLogin }) => {
     </Box>
   );
 };
-
 export default Register;
