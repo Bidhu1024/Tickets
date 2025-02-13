@@ -20,7 +20,7 @@ import Header from "../../components/Header";
 const validationSchema = Yup.object({
   name: Yup.string()
     .required("Name is required")
-    .min(2, "Name must be at least 2 characters")
+    .min(4, "Name must be at least 4 characters")
     .max(50, "Name must be less than 50 characters"),
 
   email: Yup.string()
@@ -80,10 +80,20 @@ const Register: FC<RegisterProps> = ({ setLogin }) => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        position:"relative"
+        position: "relative",
       }}
     >
-      <img src={logo} alt="logo"  style={{position:"absolute",top:0,left:0,height:"2.5rem", width:"8rem"}} />
+      <img
+        src={logo}
+        alt="logo"
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          height: "2.5rem",
+          width: "8rem",
+        }}
+      />
       <Box
         sx={{
           width: { xs: "90%", sm: "80%", md: "90%", lg: "90%" },
@@ -171,12 +181,9 @@ const Register: FC<RegisterProps> = ({ setLogin }) => {
               />
             </Grid>
 
-            <Grid item xs={12} md={6} sx={{mt:"2.6rem"}}>
+            <Grid item xs={12} md={6} sx={{ mt: "2.6rem" }}>
               <FormControl component="fieldset" sx={{ width: "100%" }}>
-                <FormLabel
-                  component="legend"
-                  sx={{ color: "text.primary" }}
-                >
+                <FormLabel component="legend" sx={{ color: "text.primary" }}>
                   Role*
                 </FormLabel>
                 <RadioGroup
