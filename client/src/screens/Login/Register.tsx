@@ -11,11 +11,15 @@ import {
 } from "@mui/material";
 import TextBox from "../../components/TextBox";
 import logo from "../../assets/Screenshot 2025-02-10 232009.png";
+import { toast } from "react-toastify";
 import background from "../../assets/123.jpeg";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { FC } from "react";
 import Header from "../../components/Header";
+import useApiCalls from "../../helpers/hooks/useApiCalls";
+import User from "../../services/User";
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object({
   name: Yup.string()
@@ -36,7 +40,7 @@ phone: Yup.string()
       "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
     ),
 
-  confirm_password: Yup.string()
+    confirmPassword: Yup.string()
     .required("Confirm Password is required")
     .oneOf([Yup.ref("password")], "Passwords must match"),
 
@@ -48,18 +52,32 @@ interface RegisterProps {
   setLogin: (val: boolean) => void;
 }
 const Register: FC<RegisterProps> = ({ setLogin }) => {
+
+const navigate = useNavigate()
+  const registerUser = useApiCalls({
+    fn: User.registerUser,
+    onError: (d) => {
+      toast.error(d?.data?.error || "Something went wrong");
+    },
+    onSuccess: () => {
+      console.log('success')
+      navigate("/");
+      toast.success("Registration Successful");
+    },
+  });
+
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
       name: "",
-      confirm_password: "",
+      confirmPassword: "",
       phone: "",
       role: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log("Form submitted:", values);
+      registerUser.mutate({data:values})
     },
   });
 
@@ -159,17 +177,17 @@ const Register: FC<RegisterProps> = ({ setLogin }) => {
               <TextBox
                 placeholder="Confirm your password"
                 title="Confirm Password*"
-                value={formik.values.confirm_password}
+                value={formik.values.confirmPassword}
                 onChange={(value) =>
-                  formik.setFieldValue("confirm_password", value)
+                  formik.setFieldValue("confirmPassword", value)
                 }
                 error={
-                  formik.touched.confirm_password &&
-                  Boolean(formik.errors.confirm_password)
+                  formik.touched.confirmPassword &&
+                  Boolean(formik.errors.confirmPassword)
                 }
                 helperText={
-                  formik.touched.confirm_password &&
-                  formik.errors.confirm_password
+                  formik.touched.confirmPassword &&
+                  formik.errors.confirmPassword
                 }
                 type="password"
               />
