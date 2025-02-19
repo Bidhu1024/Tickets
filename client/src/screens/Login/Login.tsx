@@ -6,7 +6,10 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { FC } from "react";
 import Header from "../../components/Header";
-
+import useApiCalls from "../../helpers/hooks/useApiCalls";
+import User from "../../services/User";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 const validationSchema = Yup.object({
   email: Yup.string()
     .email("Invalid email address")
@@ -21,6 +24,18 @@ interface LoginProps {
 }
 
 const Login: FC<LoginProps> = ({ setLogin }) => {
+  const navigate = useNavigate()
+  const handleLogin = useApiCalls({
+    fn: User.loginUser,
+    onError: (d) => {
+      alert(d?.data?.error ?? "Something went wrong");
+    },
+    onSuccess: () => {
+      console.log("success");
+      navigate("/");
+      alert("Login Success");
+    },
+  });
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -28,14 +43,12 @@ const Login: FC<LoginProps> = ({ setLogin }) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log("Form submitted:", values);
+      console.log('here')
+      handleLogin.mutate({data:values})
     },
   });
 
-  const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    console.log("done");
-  };
+  
 
   return (
     <Box
@@ -97,7 +110,7 @@ const Login: FC<LoginProps> = ({ setLogin }) => {
             >
               Please enter your details
             </Typography>
-            <form autoComplete="off">
+            <form autoComplete="off" onSubmit={formik.handleSubmit}>
               <TextBox
                 placeholder="Enter your email"
                 title="Email*"
@@ -129,7 +142,7 @@ const Login: FC<LoginProps> = ({ setLogin }) => {
                 }}
                 children="Login"
                 variant="contained"
-                onClick={handleLogin}
+             type="submit"
               />
             </form>
           </Box>

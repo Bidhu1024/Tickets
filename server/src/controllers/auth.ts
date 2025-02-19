@@ -43,7 +43,7 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
     }
     const isMatch = await user.matchPassword(password);
     if (!isMatch) {
-      res.status(400).json({ message: 'Invalid credentials' });
+      res.status(400).json({ message: 'Invalid credentials no match' });
       return;
     }
     const token = jwt.sign({ id: user._id }, JWT_SECRET, {
