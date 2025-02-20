@@ -8,6 +8,7 @@ export interface IUser extends Document {
   phone: string;
   confirmPassword?: string;
   matchPassword: (enteredPassword: string) => Promise<boolean>;
+  role:string;
 }
 
 const userSchema: Schema = new mongoose.Schema({

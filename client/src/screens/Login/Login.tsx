@@ -4,12 +4,13 @@ import TextBox from "../../components/TextBox";
 import logo from "../../assets/Screenshot 2025-02-10 232009.png";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { FC } from "react";
+import { FC, memo } from "react";
+import { useDispatch} from "react-redux";
 import Header from "../../components/Header";
 import useApiCalls from "../../helpers/hooks/useApiCalls";
 import User from "../../services/User";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { loginSuccess } from "../../rtk/slices/authSlice";
 const validationSchema = Yup.object({
   email: Yup.string()
     .email("Invalid email address")
@@ -25,13 +26,15 @@ interface LoginProps {
 
 const Login: FC<LoginProps> = ({ setLogin }) => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   const handleLogin = useApiCalls({
     fn: User.loginUser,
     onError: (d) => {
       alert(d?.data?.error ?? "Something went wrong");
     },
-    onSuccess: () => {
-      console.log("success");
+    onSuccess: (resp) => {
+      dispatch(loginSuccess(resp.data))
       navigate("/");
       alert("Login Success");
     },
@@ -161,4 +164,4 @@ const Login: FC<LoginProps> = ({ setLogin }) => {
   );
 };
 
-export default Login;
+export default memo(Login);
