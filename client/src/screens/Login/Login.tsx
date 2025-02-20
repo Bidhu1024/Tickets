@@ -46,7 +46,6 @@ const Login: FC<LoginProps> = ({ setLogin }) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log('here')
       handleLogin.mutate({data:values})
     },
   });
