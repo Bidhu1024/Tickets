@@ -60,7 +60,6 @@ const navigate = useNavigate()
       toast.error(d?.data?.error || "Something went wrong");
     },
     onSuccess: () => {
-      console.log('success')
       navigate("/");
       toast.success("Registration Successful");
     },

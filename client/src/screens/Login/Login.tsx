@@ -4,13 +4,14 @@ import TextBox from "../../components/TextBox";
 import logo from "../../assets/Screenshot 2025-02-10 232009.png";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { FC, memo } from "react";
-import { useDispatch} from "react-redux";
+import { FC, memo, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Header from "../../components/Header";
 import useApiCalls from "../../helpers/hooks/useApiCalls";
 import User from "../../services/User";
 import { useNavigate } from "react-router-dom";
 import { loginSuccess } from "../../rtk/slices/authSlice";
+
 const validationSchema = Yup.object({
   email: Yup.string()
     .email("Invalid email address")
@@ -25,8 +26,20 @@ interface LoginProps {
 }
 
 const Login: FC<LoginProps> = ({ setLogin }) => {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  // Access the auth state from Redux
+  const { user, token } = useSelector((state: any) => {
+    console.log(state)
+    return state.auth
+  });
+
+  // Log user and token whenever they change
+  useEffect(() => {
+    console.log("User:", user);
+    console.log("Token:", token);
+  }, [user, token]);
 
   const handleLogin = useApiCalls({
     fn: User.loginUser,
@@ -34,11 +47,12 @@ const Login: FC<LoginProps> = ({ setLogin }) => {
       alert(d?.data?.error ?? "Something went wrong");
     },
     onSuccess: (resp) => {
-      dispatch(loginSuccess(resp.data))
-      navigate("/");
-      alert("Login Success");
+      const { user, token } = resp.data;
+      dispatch(loginSuccess({ user, token }));
+      navigate("/dashboard");
     },
   });
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -46,11 +60,9 @@ const Login: FC<LoginProps> = ({ setLogin }) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      handleLogin.mutate({data:values})
+      handleLogin.mutate({ data: values });
     },
   });
-
-  
 
   return (
     <Box
@@ -144,7 +156,7 @@ const Login: FC<LoginProps> = ({ setLogin }) => {
                 }}
                 children="Login"
                 variant="contained"
-             type="submit"
+                type="submit"
               />
             </form>
           </Box>
