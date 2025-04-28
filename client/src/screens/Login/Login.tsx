@@ -29,13 +29,10 @@ const Login: FC<LoginProps> = ({ setLogin }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // Access the auth state from Redux
   const { user, token } = useSelector((state: any) => {
-    console.log(state)
     return state.auth
   });
 
-  // Log user and token whenever they change
   useEffect(() => {
     console.log("User:", user);
     console.log("Token:", token);
