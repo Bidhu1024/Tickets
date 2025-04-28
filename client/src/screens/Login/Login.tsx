@@ -30,7 +30,6 @@ const Login: FC<LoginProps> = ({ setLogin }) => {
   const dispatch = useDispatch();
 
   const { user, token } = useSelector((state: any) => {
-    console.log(state)
     return state.auth
   });
 
