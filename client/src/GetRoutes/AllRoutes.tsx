@@ -25,6 +25,7 @@ const AllRoutes = () => {
             <Route path="/" element={<DashboardLayout />}>
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="shows" element={<Shows />} />
+              
               {/* Add MySpace, Support, etc here later */}
             </Route>
           )}

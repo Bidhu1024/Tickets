@@ -32,8 +32,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next(Error("Endpoint not found"));
 });
 
-app.listen(8800, () => {
-  console.log("server started at port 8800");
+app.listen(8801, () => {
+  console.log("server started at port 8801");
   connect();
   console.log("connected to backend");
 });

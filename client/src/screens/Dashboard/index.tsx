@@ -10,7 +10,7 @@ const Dashboard = () => {
       <Box width={"100%"} height={"100vh"} p={2}>
         {user.role === "Organizer" ? (
           <>
-          <OrganizersDashboard />
+            <OrganizersDashboard />
           </>
         ) : (
           <>User Dashboard</>
