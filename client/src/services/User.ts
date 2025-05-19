@@ -13,4 +13,9 @@ export default class User {
         instance.post(baseUrl + "/register", values.data)
       );
     }
+     static logoutUser(values: any) {
+      return apiPromise(instance, () =>
+        instance.post(baseUrl + "/logout", values.data)
+      );
+    }
 }

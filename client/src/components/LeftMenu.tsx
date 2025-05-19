@@ -4,6 +4,8 @@ import { SoldGreenCircle } from "./svg/Green";
 import { SoldYellowCircle } from "./svg/Yellow";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { logout } from "../rtk/slices/authSlice";
 
 const menuItemsList = [
   { name: "Menu", path: "/dashboard" },
@@ -19,6 +21,12 @@ const LeftMenu = () => {
   const handleMenuClick = (menuItem: { name: string; path: string }) => {
     setSelectedMenu(menuItem.name);
     navigate(menuItem.path);
+  };
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
+    localStorage.clear();
   };
 
   return (
@@ -67,7 +75,9 @@ const LeftMenu = () => {
               transition: "all 0.3s",
               "&:hover": {
                 backgroundColor:
-                  selectedMenu === element.name ? "white" : "rgba(255, 255, 255, 0.2)",
+                  selectedMenu === element.name
+                    ? "white"
+                    : "rgba(255, 255, 255, 0.2)",
               },
             }}
           >
@@ -76,12 +86,7 @@ const LeftMenu = () => {
         ))}
       </Stack>
 
-      <Box
-        position="absolute"
-        bottom="20px"
-        width="80%"
-        left="10%"
-      >
+      <Box position="absolute" bottom="20px" width="80%" left="10%">
         <Button
           variant="contained"
           color="secondary"
@@ -91,6 +96,7 @@ const LeftMenu = () => {
             fontWeight: "bold",
             textTransform: "none",
           }}
+          onClick={() => handleLogout()}
         >
           Logout
         </Button>
