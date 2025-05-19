@@ -28,7 +28,9 @@ const EventModal = ({ open, onClose }: Props) => {
             <CloseIcon />
           </IconButton>
         </Box>
-
+        <Box>
+          <form action="post"></form>
+        </Box>
       </Box>
     </Modal>
   );
